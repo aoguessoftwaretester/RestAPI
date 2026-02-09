@@ -1,0 +1,41 @@
+name: Rest Assured API Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+
+      - name: Verify Java version
+        run: java -version
+
+      - name: Show repo structure (debug)
+        run: ls -la
+
+      - name: Run API tests with Maven
+        run: |
+          cd APIrestassured
+          ls -la
+          mvn clean test
+
+      - name: Upload TestNG reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testng-reports
+          path: APIrestassured/test-output
