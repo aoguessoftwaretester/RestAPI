@@ -4,6 +4,7 @@
         <classes>
             <class name="APItest.testrestfulbooker"/>
             <class name="APItest.VerifyAuthentication"/>
+            <class name="APItest.VerifyCreateBookingResponsePayload"/>
         </classes>
     </test>
 </suite>
