@@ -37,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: testng-reports
-          path: RestAPI/target/surefire-reports/
+          path: target/surefire-reports/
