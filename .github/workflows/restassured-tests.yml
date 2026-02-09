@@ -32,3 +32,10 @@ jobs:
           cd APIrestassured
           ls -la
           mvn clean test
+
+      - name: Upload TestNG reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testng-reports
+          path: APIrestassured/test-output
