@@ -16,29 +16,29 @@
 
 
 <!-- Source: https://mvnrepository.com/artifact/io.rest-assured/rest-assured-common -->
-<dependency>
+<!-- <dependency>
     <groupId>io.rest-assured</groupId>
     <artifactId>rest-assured-common</artifactId>
     <version>4.4.0</version>
     <scope>compile</scope>
-</dependency>
+</dependency> -->
 
 <!-- Source: https://mvnrepository.com/artifact/io.rest-assured/rest-assured-all -->
-<dependency>
+<!--<dependency>
     <groupId>io.rest-assured</groupId>
     <artifactId>rest-assured-all</artifactId>
     <version>4.4.0</version>
     <scope>test</scope>
-</dependency>  
+</dependency>   -->
 
 <!-- Source: https://mvnrepository.com/artifact/io.rest-assured/json-path -->
-<dependency>
+<!--<dependency>
     <groupId>io.rest-assured</groupId>
     <artifactId>json-path</artifactId>
     <version>4.4.0</version>
     <scope>compile</scope>
-</dependency>
-
+</dependency> -->
+ 
     <!-- Force Groovy version compatible with Java 17+ -->
     <dependency>
         <groupId>org.apache.groovy</groupId>
@@ -59,6 +59,29 @@
     <artifactId>jackson-databind</artifactId>
     <version>2.15.2</version>
   </dependency> 
+  
+      <!-- JUnit 5 -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.10.0</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.10.0</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Hamcrest for assertions -->
+    <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest</artifactId>
+        <version>2.2</version>
+        <scope>test</scope>
+    </dependency>
 
 </dependencies>  
   
@@ -68,14 +91,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>3.2.5</version>
                 <configuration>
                     <!-- Tell Surefire to use your TestNG suite file -->
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <!-- Optional: stop build on failure (true by default) -->
-                    <testFailureIgnore>false</testFailureIgnore>
                 </configuration>
             </plugin>
         </plugins>

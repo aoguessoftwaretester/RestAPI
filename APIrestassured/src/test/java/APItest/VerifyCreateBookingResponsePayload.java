@@ -1,13 +1,22 @@
 package APItest;
 
-import static io.restassured.RestAssured.*;
-
-import io.restassured.http.ContentType;
-import org.testng.annotations.*;
-import io.restassured.response.Response;
 import java.util.HashMap;
+import java.util.Map;
 
-public class testrestfulbooker {
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+//import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
+public class VerifyCreateBookingResponsePayload {
 	
 	String token;
 	int bookingId;
@@ -37,10 +46,11 @@ public class testrestfulbooker {
 
         System.out.println("Generated Token: " + token);
     }
+	
+	@Test(priority = 1)
+    public void createBookingAndValidateResponse() {
 
- // ---------- CREATE BOOKING ----------
-	@Test
-    public void createBooking() {
+        // Booking details payload
         HashMap<String, Object> bookingDates = new HashMap<>();
         bookingDates.put("checkin", "2025-01-01");
         bookingDates.put("checkout", "2025-01-10");
@@ -66,60 +76,26 @@ public class testrestfulbooker {
         // Capture bookingId
         bookingId = response.jsonPath().getInt("bookingid");
         System.out.println("Created Booking ID: " + bookingId);
-    }
-    
-	// ---------- GET ALL BOOKINGS ----------
-    @Test
-    public void getAllBookings() {
-        given()
-        .when()
-            .get("/booking")
-        .then()
-            .statusCode(200)
-            .log().body();  // Prints the response body
-    }
+        
+        // Extract response JSON
+        Map<String, Object> responseBody = response.jsonPath().getMap("booking");
 
-    // ---------- GET BOOKING BY ID ----------
-    @Test
-    public void getBookingById() {
-        given()
-            .pathParam("id", bookingId)
-        .when()
-            .get("/booking/{id}")
-        .then()
-            .statusCode(200)
-            .log().body();  // Prints the response body
+        // Compare each field
+        assertThat(responseBody.get("firstname"), equalTo(payload.get("firstname")));
+        assertThat(responseBody.get("lastname"), equalTo(payload.get("lastname")));
+        assertThat(responseBody.get("totalprice"), equalTo(payload.get("totalprice")));
+        assertThat(responseBody.get("depositpaid"), equalTo(payload.get("depositpaid")));
+        assertThat(((Map) responseBody.get("bookingdates")).get("checkin"),
+                equalTo(bookingDates.get("checkin")));
+        assertThat(((Map) responseBody.get("bookingdates")).get("checkout"),
+                equalTo(bookingDates.get("checkout")));
+        assertThat(responseBody.get("additionalneeds"), equalTo(payload.get("additionalneeds")));
+        
+     // Optional: print the booking ID
+        System.out.println("Booking created successfully with ID: " + response.jsonPath().getInt("bookingid"));
     }
-    
- // ---------- UPDATE BOOKING ----------
-    @Test
-    public void updateBooking() {
-        HashMap<String, Object> bookingDates = new HashMap<>();
-        bookingDates.put("checkin", "2025-02-01");
-        bookingDates.put("checkout", "2025-02-15");
-
-        HashMap<String, Object> updatePayload = new HashMap<>();
-        updatePayload.put("firstname", "Jane");
-        updatePayload.put("lastname", "Smith");
-        updatePayload.put("totalprice", 300);
-        updatePayload.put("depositpaid", false);
-        updatePayload.put("bookingdates", bookingDates);
-        updatePayload.put("additionalneeds", "Lunch");
-
-        given()
-            .contentType(ContentType.JSON)
-            .cookie("token", token)
-            .pathParam("id", bookingId)
-            .body(updatePayload)
-        .when()
-            .put("/booking/{id}")
-        .then()
-            .statusCode(200)
-            .log().body();
-    }
-    
-    // ---------- DELETE BOOKING ----------
-    @Test(dependsOnMethods = "updateBooking")
+	   // ---------- DELETE BOOKING ----------
+    @Test(priority = 2)
     public void deleteBooking() {
         given()
             .cookie("token", token)
@@ -130,5 +106,4 @@ public class testrestfulbooker {
             .statusCode(201)
             .log().body();
     }
-    
 }
