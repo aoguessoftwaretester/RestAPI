@@ -64,5 +64,38 @@ public class VerifyAuthentication {
             .body("reason", org.hamcrest.Matchers.equalTo("Bad credentials"));
     }
 
+	@Test
+    public void testAuth_WrongUsername() {
+        HashMap<String, String> authBody = new HashMap<>();
+        authBody.put("username", "wrongusername");
+        authBody.put("password", "password123");
+
+        given()
+            .baseUri(BASE_URL)
+            .contentType(ContentType.JSON)
+            .body(authBody)
+        .when()
+            .post("/auth")
+        .then()
+            .statusCode(200)               // The API returns 200 even for bad creds
+            .body("reason", org.hamcrest.Matchers.equalTo("Bad credentials"));
+    }
+
+	@Test
+    public void testAuth_BlankUser() {
+        HashMap<String, String> authBody = new HashMap<>();
+        authBody.put("username", "");
+        authBody.put("password", "");
+
+        given()
+            .baseUri(BASE_URL)
+            .contentType(ContentType.JSON)
+            .body(authBody)
+        .when()
+            .post("/auth")
+        .then()
+            .statusCode(200)               // Still returns 200
+            .body("reason", org.hamcrest.Matchers.equalTo("Bad credentials"));
+    }
 
 }
