@@ -16,7 +16,7 @@ public class VerifyAuthentication {
 	
 	public final String BASE_URL = "https://restful-booker.herokuapp.com";
 		
-	@Test //(priority = 1)
+	@Test(priority = 1)
 	public void testCorrectAuth()
 	{
 		// Create request body
@@ -43,5 +43,23 @@ public class VerifyAuthentication {
 		assert token != null && !token.isEmpty();
 		System.out.println("Generated Token: " + token);
 	}
+	
+	@Test(priority = 2)
+    public void testAuth_WrongPassword() {
+        HashMap<String, String> authBody = new HashMap<>();
+        authBody.put("username", "admin");
+        authBody.put("password", "wrongpassword");
+
+        given()
+            .baseUri(BASE_URL)
+            .contentType(ContentType.JSON)
+            .body(authBody)
+        .when()
+            .post("/auth")
+        .then()
+            .statusCode(200)               // The API returns 200 even for bad creds
+            .body("reason", org.hamcrest.Matchers.equalTo("Bad credentials"));
+    }
+
 
 }
