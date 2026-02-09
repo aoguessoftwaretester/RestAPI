@@ -21,10 +21,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Build and run tests
+        working-directory: RestAPI   # where pom.xml is
         run: mvn clean test -DsuiteXmlFile=testng.xml
 
       - name: Upload TestNG Report
         uses: actions/upload-artifact@v4
         with:
           name: testng-reports
-          path: target/surefire-reports/
+          path: RestAPI/target/surefire-reports/
