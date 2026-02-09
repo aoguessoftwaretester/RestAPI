@@ -33,8 +33,9 @@ jobs:
           ls -la
           mvn clean test
 
-      - name: Upload TestNG Report
+      - name: Upload TestNG reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: testng-reports
-          path: target/surefire-reports/
+          path: APIrestassured/test-output
