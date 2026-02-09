@@ -24,6 +24,11 @@ jobs:
       - name: Verify Java version
         run: java -version
 
+      - name: Show repo structure (debug)
+        run: ls -la
+
       - name: Run API tests with Maven
-        working-directory: APIrestassured
-        run: mvn clean test
+        run: |
+          cd APIrestassured
+          ls -la
+          mvn clean test
