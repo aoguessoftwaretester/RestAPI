@@ -1,4 +1,4 @@
-name: Java TestNG Tests
+name: Rest Assured API Tests
 
 on:
   push:
@@ -7,22 +7,31 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  api-tests:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          java-version: '17'
           distribution: 'temurin'
+          java-version: '17'
+          cache: maven
 
-      - name: Build and run tests
-        working-directory: RestAPI   # where pom.xml is
-        run: mvn clean test -DsuiteXmlFile=testng.xml
+      - name: Verify Java version
+        run: java -version
+
+      - name: Show repo structure (debug)
+        run: ls -la
+
+      - name: Run API tests with Maven
+        run: |
+          cd APIrestassured
+          ls -la
+          mvn clean test
 
       - name: Upload TestNG Report
         uses: actions/upload-artifact@v4
