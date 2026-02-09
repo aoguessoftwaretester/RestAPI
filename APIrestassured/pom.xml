@@ -62,5 +62,23 @@
 
 </dependencies>  
   
-
+    <build>
+        <plugins>
+            <!-- Surefire plugin to run TestNG tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <!-- Tell Surefire to use your TestNG suite file -->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/java/APItest/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <!-- Optional: stop build on failure (true by default) -->
+                    <testFailureIgnore>false</testFailureIgnore>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
 </project>

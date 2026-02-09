@@ -34,7 +34,8 @@ public class testrestfulbooker {
         .when()
             .post("/booking")
         .then()
-            .statusCode(200);
+            .statusCode(200)
+            .log().body();  // Prints the response body
     }
     
     @Test
@@ -43,7 +44,8 @@ public class testrestfulbooker {
         .when()
             .get("/booking")
         .then()
-            .statusCode(200);
+            .statusCode(200)
+            .log().body();  // Prints the response body
     }
 
     @Test
@@ -53,7 +55,8 @@ public class testrestfulbooker {
         .when()
             .get("/booking/{id}")
         .then()
-            .statusCode(200);
+            .statusCode(200)
+            .log().body();  // Prints the response body
     }
     
 }

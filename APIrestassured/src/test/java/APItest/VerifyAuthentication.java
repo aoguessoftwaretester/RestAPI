@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 //import io.restassured.response.ResponseBodyExtractionOptions;
 //import io.restassured.specification.RequestSpecification;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -16,7 +17,7 @@ public class VerifyAuthentication {
 	
 	public final String BASE_URL = "https://restful-booker.herokuapp.com";
 		
-	@Test(priority = 1)
+	@Test
 	public void testCorrectAuth()
 	{
 		// Create request body
@@ -40,11 +41,13 @@ public class VerifyAuthentication {
 		
 		// Assert that token exist
 		String token = response.jsonPath().getString("token");
-		assert token != null && !token.isEmpty();
+		Assert.assertNotNull(token, "Token should not be null");
+	    Assert.assertFalse(token.isEmpty(), "Token should not be empty");
+		//assert token != null && !token.isEmpty();
 		System.out.println("Generated Token: " + token);
 	}
 	
-	@Test(priority = 2)
+	@Test
     public void testAuth_WrongPassword() {
         HashMap<String, String> authBody = new HashMap<>();
         authBody.put("username", "admin");
