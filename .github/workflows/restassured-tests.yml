@@ -25,4 +25,5 @@ jobs:
         run: java -version
 
       - name: Run API tests with Maven
+        working-directory: APIrestassured
         run: mvn clean test
