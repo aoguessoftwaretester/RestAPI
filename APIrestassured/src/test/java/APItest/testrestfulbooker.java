@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class testrestfulbooker {
 
-    @BeforeClass
+    //@BeforeClass
     public void setup() {
         baseURI = "https://restful-booker.herokuapp.com";
     }

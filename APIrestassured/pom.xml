@@ -16,29 +16,29 @@
 
 
 <!-- Source: https://mvnrepository.com/artifact/io.rest-assured/rest-assured-common -->
-<dependency>
+<!-- <dependency>
     <groupId>io.rest-assured</groupId>
     <artifactId>rest-assured-common</artifactId>
     <version>4.4.0</version>
     <scope>compile</scope>
-</dependency>
+</dependency> -->
 
 <!-- Source: https://mvnrepository.com/artifact/io.rest-assured/rest-assured-all -->
-<dependency>
+<!--<dependency>
     <groupId>io.rest-assured</groupId>
     <artifactId>rest-assured-all</artifactId>
     <version>4.4.0</version>
     <scope>test</scope>
-</dependency>  
+</dependency>   -->
 
 <!-- Source: https://mvnrepository.com/artifact/io.rest-assured/json-path -->
-<dependency>
+<!--<dependency>
     <groupId>io.rest-assured</groupId>
     <artifactId>json-path</artifactId>
     <version>4.4.0</version>
     <scope>compile</scope>
-</dependency>
-
+</dependency> -->
+ 
     <!-- Force Groovy version compatible with Java 17+ -->
     <dependency>
         <groupId>org.apache.groovy</groupId>
@@ -72,7 +72,7 @@
                 <configuration>
                     <!-- Tell Surefire to use your TestNG suite file -->
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/java/APItest/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <!-- Optional: stop build on failure (true by default) -->
                     <testFailureIgnore>false</testFailureIgnore>
