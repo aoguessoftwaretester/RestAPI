@@ -61,7 +61,7 @@
   </dependency> 
   
       <!-- JUnit 5 -->
-    <dependency>
+<!--    <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>
         <version>5.10.0</version>
@@ -73,9 +73,9 @@
         <artifactId>junit-jupiter-engine</artifactId>
         <version>5.10.0</version>
         <scope>test</scope>
-    </dependency>
+    </dependency> -->
 
-    <!-- Hamcrest for assertions -->
+    <!-- Hamcrest for assertions  -->
     <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest</artifactId>
@@ -91,7 +91,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>3.1.2</version>
                 <configuration>
                     <!-- Tell Surefire to use your TestNG suite file -->
                     <suiteXmlFiles>
