@@ -75,7 +75,7 @@
         <scope>test</scope>
     </dependency> -->
 
-    <!-- Hamcrest for assertions -->
+    <!-- Hamcrest for assertions  -->
     <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest</artifactId>
